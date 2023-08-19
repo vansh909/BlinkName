@@ -1,52 +1,116 @@
-void setup() {
-  pinMode(LED_BUILTIN, OUTPUT);
-}
+const int led = 13; // Led Pin Number
 
-void Dot()
-{
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(200);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(900);
-}
-void Dash()
-{
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(800);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(900);
+void setup() {
+  pinMode(led, OUTPUT);    // Setting the pin as OUTPUT pin
 }
 
 void loop() {
-  //name-VANSH
-  //Morse Code - (V)..._  (A)._  (N)_.  (S)...  (H)....
+  char msg[] = "VANSH"; // HERE WE ARE STORING THE NAME IN ARRAY
+  int msglength = strlen(msg);
+  
+  for (int i = 0; i < msglength; i++) {     //THE LOOP WILL RUN THROUGHOUT THE LENGTH OF AN ARRAY
+    char a = toupper(msg[i]);         
 
-  //For V
-  Dot();
-  Dot();
-  Dot();
-  delay(1500);
-
-  //for A
-  Dot();
-  Dash();
-  delay(1500);
-
-  //for N
-  Dash();
-  Dot();
-  delay(1500);
-
-  //for S
-  Dot();
-  Dot();
-  Dot();
-  delay(1500);
-
-  //for H
-  Dot();
-  Dot();
-  Dot();
-  Dot();
-  delay(1500);
+    switch (a) {
+      case 'A':
+        blinkFunc(".-");
+        break;
+      case 'B':
+        blinkFunc("-...");
+        break;
+      case 'C':
+        blinkFunc("-.-.");
+      case 'D':
+        blinkFunc("-..");
+        break;
+      case 'E':
+        blinkFunc(".");
+        break;
+      case 'F':
+        blinkFunc("-.");
+        break;
+      case 'G':
+        blinkFunc("--.");
+        break;
+       case 'H':
+        blinkFunc("....");
+        break;
+       case 'I':
+        blinkFunc("..");
+        break;
+       case 'J':
+        blinkFunc(".---");
+        break;
+       case 'K':
+        blinkFunc("-.-");
+        break;
+       case 'L':
+        blinkFunc(".-..");
+        break;
+       case 'M':
+        blinkFunc("--");
+        break;
+       case 'N':
+        blinkFunc("-.");
+        break;
+       case 'O':
+        blinkFunc("---");
+        break;
+       case 'P':
+        blinkFunc(".--.");
+        break;
+       case 'Q':
+        blinkFunc("--.-");
+        break;
+       case 'R':
+        blinkFunc(".-.");
+        break;
+       case 'S':
+        blinkFunc("...");
+        break;
+       case 'T':
+        blinkFunc("-");
+        break;
+       case 'U':
+        blinkFunc("..-");
+        break;
+       case 'V':
+        blinkFunc("...-");
+        break;
+       case 'W':
+        blinkFunc(".--");
+        break;
+       case 'X':
+        blinkFunc("-..-");
+        break;
+       case 'Y':
+        blinkFunc("-.--");
+        break;
+       case 'Z':
+        blinkFunc("--..");
+        break;
+      default:
+        delay(300);
+        break;
+    }
+    delay(3000); // SPACING BETWEEN THE LETTERS
+  }
+  delay(1000); 
+}
+// Implementing The Function For Blinking
+void blinkFunc(const char* morsecode) {
+  for (int i = 0; morsecode[i]; i++) {    // For Loop For Running Through the Morsecode
+    if (morsecode[i] == '.') {            // For Running The dot Method
+      digitalWrite(led, HIGH);       // Setting pin high
+      delay(500);
+      digitalWrite(led, LOW);        // Setting the pin Low
+      delay(400);
+    }
+    else if (morsecode[i] == '-') {       // Run the Dash Method
+      digitalWrite(led, HIGH);         // Set the pin-High
+      delay(1800);
+      digitalWrite(led, LOW);        // Setting the pin Low
+      delay(400);
+    }
+  }
 }
